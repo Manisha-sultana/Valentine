@@ -3,128 +3,166 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Will You Be My Valentine?</title>
+    <title>Be My Valentine 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif
+        }
+
         body {
             margin: 0;
             height: 100vh;
-            background: pink;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9acb, #ffc0da);
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-family: 'Poppins', sans-serif;
+            justify-content: center;
         }
 
-        .container {
+        .container,
+        .yay {
             text-align: center;
         }
 
         h1 {
-            font-size: 40px;
             color: #d6006f;
+            font-size: 2.2rem
         }
 
         .buttons {
-            margin-top: 30px;
+            margin-top: 25px
         }
 
         button {
-            padding: 15px 35px;
-            font-size: 20px;
-            border: none;
+            padding: 14px 34px;
+            font-size: 18px;
+            border: 0;
             border-radius: 30px;
-            cursor: pointer;
-            position: relative;
+            cursor: pointer
         }
 
-        #yesBtn {
+        #yes {
             background: #ff2f92;
-            color: white;
-            margin-right: 20px;
+            color: #fff
         }
 
-        #noBtn {
-            background: white;
+        #no {
+            background: #fff;
             color: #ff2f92;
-            position: absolute;
+            position: absolute
         }
 
-        /* YES PAGE */
-        .yay-page {
-            display: none;
-            text-align: center;
+        .yay {
+            display: none
         }
 
-        .yay-page h1 {
-            font-size: 50px;
-            color: #ff0066;
+        .yay h1 {
+            font-size: 2.5rem;
+            color: #ff0066
         }
 
-        .heart {
-            font-size: 40px;
-        }
-
-        .love-text {
-            margin-top: 20px;
-            font-size: 30px;
+        .love {
+            font-size: 1.8rem;
             color: red;
+            margin-top: 15px
         }
 
         img {
-            margin-top: 20px;
-            width: 250px;
-            border-radius: 20px;
+            width: 240px;
+            border-radius: 18px;
+            margin-top: 15px
+        }
+
+        /* floating hearts */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 22px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0
+            }
+        }
+
+        /* music button */
+        .music {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer
         }
     </style>
 </head>
 
 <body>
 
-    <!-- PAGE 1 -->
+    <div class="music" onclick="toggleMusic()">🎵</div>
+
     <div class="container" id="page1">
         <h1>Bbe 💕 will you be my Valentine?</h1>
         <div class="buttons">
-            <button id="yesBtn">Yes 💖</button>
-            <button id="noBtn">No 😜</button>
+            <button id="yes">Yes 💖</button>
+            <button id="no">No 😜</button>
         </div>
     </div>
 
-    <!-- PAGE 2 -->
-    <div class="yay-page" id="page2">
-        <h1>
-            💗 YAY!!! 💗
-            <span class="heart">💞</span>
-            Best decision ever 😘
-            <span class="heart">💞</span>
-        </h1>
-
-        <!-- GIF (you can change link if you want) -->
-        <img src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif" alt="love gif">
-
-        <div class="love-text">
-            I love you ❤️
-        </div>
+    <div class="yay" id="page2">
+        <h1>💗 YAY!!! 💗 <br> Best decision ever 😘</h1>
+        <img src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif">
+        <div class="love">I love you ❤️</div>
     </div>
+
+    <audio id="bgm" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        const noBtn = document.getElementById("noBtn");
-        const yesBtn = document.getElementById("yesBtn");
-        const page1 = document.getElementById("page1");
-        const page2 = document.getElementById("page2");
+        const noBtn = document.getElementById("no");
+        const yesBtn = document.getElementById("yes");
+        const p1 = document.getElementById("page1");
+        const p2 = document.getElementById("page2");
+        const music = document.getElementById("bgm");
 
-        // NO button ghumta phire 😆
         noBtn.addEventListener("mouseover", () => {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
+            noBtn.style.left = Math.random() * (window.innerWidth - 80) + "px";
+            noBtn.style.top = Math.random() * (window.innerHeight - 40) + "px";
         });
 
-        // YES button click → next page
-        yesBtn.addEventListener("click", () => {
-            page1.style.display = "none";
-            page2.style.display = "block";
-        });
+        yesBtn.onclick = () => {
+            p1.style.display = "none";
+            p2.style.display = "block";
+            music.play();
+        };
+
+        function toggleMusic() {
+            music.paused ? music.play() : music.pause();
+        }
+
+        /* hearts */
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "💖";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = (Math.random() * 3 + 4) + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 6000);
+        }, 400);
     </script>
 
 </body>
