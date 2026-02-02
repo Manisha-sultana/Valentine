@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #d6006f;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #yesBtn {
+            background: #ff2f92;
+            color: white;
+            margin-right: 20px;
+        }
+
+        #noBtn {
+            background: white;
+            color: #ff2f92;
+            position: absolute;
+        }
+
+        /* YES PAGE */
+        .yay-page {
+            display: none;
+            text-align: center;
+        }
+
+        .yay-page h1 {
+            font-size: 50px;
+            color: #ff0066;
+        }
+
+        .heart {
+            font-size: 40px;
+        }
+
+        .love-text {
+            margin-top: 20px;
+            font-size: 30px;
+            color: red;
+        }
+
+        img {
+            margin-top: 20px;
+            width: 250px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1 -->
+    <div class="container" id="page1">
+        <h1>Bbe 💕 will you be my Valentine?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes 💖</button>
+            <button id="noBtn">No 😜</button>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="yay-page" id="page2">
+        <h1>
+            💗 YAY!!! 💗
+            <span class="heart">💞</span>
+            Best decision ever 😘
+            <span class="heart">💞</span>
+        </h1>
+
+        <!-- GIF (you can change link if you want) -->
+        <img src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif" alt="love gif">
+
+        <div class="love-text">
+            I love you ❤️
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const page1 = document.getElementById("page1");
+        const page2 = document.getElementById("page2");
+
+        // NO button ghumta phire 😆
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+
+        // YES button click → next page
+        yesBtn.addEventListener("click", () => {
+            page1.style.display = "none";
+            page2.style.display = "block";
+        });
+    </script>
+
+</body>
+
+</html>
